@@ -9,10 +9,10 @@ services:
 
 before_install:
   - sudo apt-get install qemu-utils
-  - docker build . --tag machacekondra/fakeovirt
-  - docker run -e NAMESPACE=cdi-test -d -p 127.0.0.1:12346:12346 machacekondra/fakeovirt
+  - docker build . --tag machacekondra/imageiotest
+  - docker run -d -p 127.0.0.1:12345:12345 machacekondra/imageiotest
   - docker ps -a
 
 script:
-  - curl -k https://127.0.0.1:12345/images/cirros -o cirros.img
-  - qemu-img check cirros.img
+  - curl -k https://127.0.0.1:12345/images/cirros -o image.img
+  - qemu-img info image.img
