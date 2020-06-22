@@ -17,5 +17,6 @@ RUN yum install -y git && \
 CMD nohup bash -c "cd ovirt-imageio/daemon && ./ovirt-imageio -c test &" && \
     sleep 3 && \
     curl --unix-socket /ovirt-imageio/daemon/test/daemon.sock -X PUT -d '{"uuid": "cirros", "size": 46137344, "url": "file:///images/cirros.img", "timeout": 30000000000000, "ops": ["read"]}' http://localhost:12345/tickets/cirros && \
+    curl --unix-socket /ovirt-imageio/daemon/test/daemon.sock -X PUT -d '{"uuid": "cirros2", "size": 46137344, "url": "file:///images/cirros.img", "timeout": 30000000000000, "ops": ["read"]}' http://localhost:12345/tickets/cirros2 && \
     curl --unix-socket /ovirt-imageio/daemon/test/daemon.sock -X PUT -d '{"uuid": "invalid", "size": 4096, "url": "file:///images/invalid.img", "timeout": 30000000000000, "ops": ["read"]}' http://localhost:12345/tickets/invalid && \
     sleep infinity
